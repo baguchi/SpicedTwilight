@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "baguchi.spiced_twilight.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "HelmetCrabMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "client": [
+    "client.HelmetCrabModelMixin"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "neoforge:add_spawns",
+  "structures": "#spiced_twilight:maze_slime_beetle_spawn",
+  "biomes": "#twilightforest:valid_labyrinth_biomes",
+  "spawners":
+  {
+    "type": "spiced_twilight:maze_slime_beetle",
+    "weight": 3,
+    "minCount": 1,
+    "maxCount": 2
+  }
+}
