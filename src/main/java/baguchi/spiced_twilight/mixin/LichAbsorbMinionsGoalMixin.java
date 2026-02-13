@@ -34,7 +34,7 @@ public class LichAbsorbMinionsGoalMixin {
         if (this.lich.getTeleportInvisibility() <= 0) {
             if (this.lich.getScepterTimeLeft() <= 0) {
                 List<LichMinion> minions = this.lich.level().getEntitiesOfClass(LichMinion.class, this.lich.getBoundingBox().inflate((double) 32.0F, (double) 16.0F, (double) 32.0F)).stream().filter((m) -> m.master == this.lich).toList();
-                if (!minions.isEmpty() && this.lich.getRandom().nextInt(2) == 0) {
+                if (!minions.isEmpty() && this.lich.getRandom().nextFloat() < 0.4F) {
                     LichMinion minion = (LichMinion) minions.getFirst();
                     minion.convertTo(TFEntities.SKELETON_DRUID.get(), true);
                     LifedrainScepterItem.animateTargetShatter((ServerLevel) this.lich.level(), minion);
