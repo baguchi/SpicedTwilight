@@ -3,12 +3,9 @@ package baguchi.spiced_twilight;
 import baguchi.spiced_twilight.attachment.BabyAttachment;
 import baguchi.spiced_twilight.attachment.HelmetCrabHideAttachment;
 import baguchi.spiced_twilight.attachment.ModAttachments;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-import net.neoforged.neoforge.event.level.ModifyCustomSpawnersEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import twilightforest.entity.monster.HelmetCrab;
 
@@ -32,11 +29,19 @@ public class CommonEvents {
     @SubscribeEvent
     public static void onHurt(LivingIncomingDamageEvent event) {
         if (event.getEntity() instanceof HelmetCrab helmetCrab) {
-            if (helmetCrab.getData(ModAttachments.HELMET_CRAB_HIDE).isHide()) {
+            HelmetCrabHideAttachment attachment = helmetCrab.getData(ModAttachments.HELMET_CRAB_HIDE);
+            if (attachment.isHide()) {
                 event.setCanceled(true);
             }else {
-                helmetCrab.getData(ModAttachments.HELMET_CRAB_HIDE).hide();
-                helmetCrab.syncData(ModAttachments.HELMET_CRAB_HIDE);
+                float amount = event.getAmount();
+                float hideChance = amount * 0.1F;
+
+                if (attachment.getHideChance() + hideChance < helmetCrab.getRandom().nextFloat()) {
+                    attachment.hide();
+                    helmetCrab.syncData(ModAttachments.HELMET_CRAB_HIDE);
+                } else {
+                    attachment.setHideChance(attachment.getHideChance() + hideChance);
+                }
             }
         }
     }

@@ -3,12 +3,12 @@ package baguchi.spiced_twilight.attachment;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 
 public class HelmetCrabHideAttachment implements INBTSerializable<CompoundTag> {
     private boolean hide;
     private int hideCooldown;
+    private float hideChance;
 
     public void setHide(boolean hide) {
         this.hide = hide;
@@ -35,6 +35,14 @@ public class HelmetCrabHideAttachment implements INBTSerializable<CompoundTag> {
         }
     }
 
+    public void setHideChance(float hideChance) {
+        this.hideChance = hideChance;
+    }
+
+    public float getHideChance() {
+        return hideChance;
+    }
+
     public int getHideCooldown() {
         return hideCooldown;
     }
@@ -46,14 +54,16 @@ public class HelmetCrabHideAttachment implements INBTSerializable<CompoundTag> {
     @Override
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag compoundTag = new CompoundTag();
-        compoundTag.putBoolean("hide", hide);
-        compoundTag.putInt("hide_cooldown", hideCooldown);
+        compoundTag.putBoolean("hide", this.hide);
+        compoundTag.putFloat("hide_chance", this.hideChance);
+        compoundTag.putInt("hide_cooldown", this.hideCooldown);
         return null;
     }
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
-        hide = nbt.getBoolean("hide");
-        hideCooldown = nbt.getInt("hide_cooldown");
+        this.hide = nbt.getBoolean("hide");
+        this.hideChance = nbt.getFloat("hide_chance");
+        this.hideCooldown = nbt.getInt("hide_cooldown");
     }
 }
