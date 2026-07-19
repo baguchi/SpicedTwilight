@@ -3,6 +3,9 @@
   "package": "baguchi.spiced_twilight.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BrewingStandBlockEntityMixin",
+    "BrewingStandMenu$FuelSlotMixin",
+    "FireBeetleMixin",
     "HelmetCrabMixin",
     "KoboldMixin",
     "LichAbsorbMinionsGoalMixin",

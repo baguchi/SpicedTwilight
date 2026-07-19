@@ -1,6 +1,6 @@
 package baguchi.spiced_twilight.mixin;
 
-import baguchi.spiced_twilight.attachment.BabyAttachment;
+import baguchi.spiced_twilight.attachment.KoboltBabyAttachment;
 import baguchi.spiced_twilight.attachment.ModAttachments;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -47,9 +47,9 @@ public class KoboldMixin extends Monster {
     public void tick() {
         super.tick();
         if (!this.level().isClientSide) {
-            BabyAttachment babyAttachment = this.getData(ModAttachments.BABY);
-            if (babyAttachment != null && spicedTwilight$baby != babyAttachment.isBaby()) {
-                babyAttachment.setBaby(spicedTwilight$baby);
+            KoboltBabyAttachment koboltBabyAttachment = this.getData(ModAttachments.BABY);
+            if (koboltBabyAttachment != null && spicedTwilight$baby != koboltBabyAttachment.isBaby()) {
+                koboltBabyAttachment.setBaby(spicedTwilight$baby);
                 this.syncData(ModAttachments.BABY);
 
             }
@@ -77,9 +77,9 @@ public class KoboldMixin extends Monster {
     public void setBaby(boolean baby) {
         super.setBaby(baby);
         this.spicedTwilight$baby = baby;
-        BabyAttachment babyAttachment = this.getData(ModAttachments.BABY);
-        if (babyAttachment != null) {
-            babyAttachment.setBaby(baby);
+        KoboltBabyAttachment koboltBabyAttachment = this.getData(ModAttachments.BABY);
+        if (koboltBabyAttachment != null) {
+            koboltBabyAttachment.setBaby(baby);
             this.syncData(ModAttachments.BABY);
         }
         if (this.level() != null && !this.level().isClientSide) {

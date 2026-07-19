@@ -28,16 +28,16 @@ public class ModAttachments {
                     return attachment2;
                 }
             }).build());
-    public static final Supplier<AttachmentType<BabyAttachment>> BABY = ATTACHMENT_TYPES.register(
-            "baby", () -> AttachmentType.serializable(BabyAttachment::new).sync(new AttachmentSyncHandler<>() {
+    public static final Supplier<AttachmentType<KoboltBabyAttachment>> BABY = ATTACHMENT_TYPES.register(
+            "baby", () -> AttachmentType.serializable(KoboltBabyAttachment::new).sync(new AttachmentSyncHandler<>() {
                 @Override
-                public void write(RegistryFriendlyByteBuf registryFriendlyByteBuf, BabyAttachment attachment, boolean b) {
+                public void write(RegistryFriendlyByteBuf registryFriendlyByteBuf, KoboltBabyAttachment attachment, boolean b) {
                     registryFriendlyByteBuf.writeBoolean(attachment.isBaby());
                 }
 
                 @Override
-                public @Nullable BabyAttachment read(IAttachmentHolder iAttachmentHolder, RegistryFriendlyByteBuf registryFriendlyByteBuf, @Nullable BabyAttachment attachment) {
-                    BabyAttachment attachment2 = new BabyAttachment();
+                public @Nullable KoboltBabyAttachment read(IAttachmentHolder iAttachmentHolder, RegistryFriendlyByteBuf registryFriendlyByteBuf, @Nullable KoboltBabyAttachment attachment) {
+                    KoboltBabyAttachment attachment2 = new KoboltBabyAttachment();
                     attachment2.setBaby(registryFriendlyByteBuf.readBoolean());
                     return attachment2;
                 }

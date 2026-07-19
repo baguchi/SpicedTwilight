@@ -1,7 +1,7 @@
 package baguchi.spiced_twilight;
 
-import baguchi.spiced_twilight.attachment.BabyAttachment;
 import baguchi.spiced_twilight.attachment.HelmetCrabHideAttachment;
+import baguchi.spiced_twilight.attachment.KoboltBabyAttachment;
 import baguchi.spiced_twilight.attachment.ModAttachments;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,7 +19,7 @@ public class CommonEvents {
         if(helmetCrabHideAttachment != null){
             helmetCrabHideAttachment.tick(event.getEntity());
         }
-        BabyAttachment baby = event.getEntity().getData(ModAttachments.BABY.get());
+        KoboltBabyAttachment baby = event.getEntity().getData(ModAttachments.BABY.get());
 
         if (baby != null) {
             baby.tick(event.getEntity());

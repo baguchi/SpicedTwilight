@@ -22,9 +22,10 @@ public class ModCreativeTabs {
     public static final Supplier<CreativeModeTab> SPICED_TWILIGHT = CREATIVE_MODE_TABS.register("spiced_twilight", () -> CreativeModeTab.builder()
             .withTabsBefore(TFCreativeTabs.ITEMS.getKey())
             .title(Component.translatable("itemGroup." + SpicedTwilight.MODID))
-            .icon(() -> ModItems.MAZE_SLIME_BEETLE_SPAWN_EGG.get().getDefaultInstance())
+            .icon(() -> ModItems.FIRE_BEETLE_POWDER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.acceptAll(Stream.of(
+                        ModItems.FIRE_BEETLE_POWDER,
                         ModItems.MAZE_SLIME_BEETLE_SPAWN_EGG
                 ).map(sup -> {
                     return sup.get().getDefaultInstance();

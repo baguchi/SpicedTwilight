@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 
-public class BabyAttachment implements INBTSerializable<CompoundTag> {
+public class KoboltBabyAttachment implements INBTSerializable<CompoundTag> {
     private boolean baby;
     private boolean needCheckSize;
 
