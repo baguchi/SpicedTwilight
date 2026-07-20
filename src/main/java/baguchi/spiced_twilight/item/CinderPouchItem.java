@@ -124,7 +124,7 @@ public class CinderPouchItem extends Item {
             Vec3 look = livingEntity.getLookAngle();
             double dist = 0.9 * 3;
             double px = livingEntity.getX() + look.x() * dist;
-            double py = livingEntity.getY() + (double) 0.25F + look.y() * dist;
+            double py = livingEntity.getY() + (double) livingEntity.getEyeHeight() + look.y() * dist;
             double pz = livingEntity.getZ() + look.z() * dist;
 
             for (int i = 0; i < 2; ++i) {
@@ -148,9 +148,9 @@ public class CinderPouchItem extends Item {
 
     private @org.jetbrains.annotations.Nullable Entity getHeadLookTarget(LivingEntity living) {
         Entity pointedEntity = null;
-        double range = 30.0F;
-        double offset = 3.0F;
-        Vec3 srcVec = new Vec3(living.getX(), living.getY() + (double) 0.25F, living.getZ());
+        double range = 60.0F;
+        double offset = 0.5F;
+        Vec3 srcVec = new Vec3(living.getX(), living.getY() + (double) living.getEyeHeight(), living.getZ());
         Vec3 lookVec = living.getViewVector(1.0F);
         Vec3 destVec = srcVec.add(lookVec.x() * range, lookVec.y() * range, lookVec.z() * range);
         float var9 = 1.5F;
