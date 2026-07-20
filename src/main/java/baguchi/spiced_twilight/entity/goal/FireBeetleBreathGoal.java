@@ -34,6 +34,7 @@ public class FireBeetleBreathGoal<T extends Mob & IBreathAttacker> extends Goal 
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
     }
 
+    @Override
     public boolean canUse() {
         this.attackTarget = this.entityHost.getLastHurtByMob();
         if (this.attackTarget != null && !(this.entityHost.distanceTo(this.attackTarget) > this.breathRange - 1) && this.entityHost.getSensing().hasLineOfSight(this.attackTarget) && EntitySelector.NO_CREATIVE_OR_SPECTATOR.and(EntitySelector.LIVING_ENTITY_STILL_ALIVE).test(this.attackTarget)) {
@@ -44,9 +45,9 @@ public class FireBeetleBreathGoal<T extends Mob & IBreathAttacker> extends Goal 
         }
     }
 
+    @Override
     public void start() {
         this.durationLeft = this.maxDuration;
-
     }
 
     public boolean canContinueToUse() {
@@ -57,7 +58,7 @@ public class FireBeetleBreathGoal<T extends Mob & IBreathAttacker> extends Goal 
         --this.durationLeft;
         this.entityHost.getLookControl().setLookAt(this.breathPos);
         this.faceVec(this.breathPos, 100.0F, 100.0F);
-        if (this.maxDuration - this.durationLeft >= 10) {
+        if (this.durationLeft < this.maxDuration - 15) {
             if (!this.entityHost.isBreathing()) {
                 this.entityHost.setBreathing(true);
             }
@@ -73,7 +74,6 @@ public class FireBeetleBreathGoal<T extends Mob & IBreathAttacker> extends Goal 
     }
 
     public void stop() {
-        this.durationLeft = this.maxDuration;
         this.attackTarget = null;
         this.entityHost.setBreathing(false);
     }

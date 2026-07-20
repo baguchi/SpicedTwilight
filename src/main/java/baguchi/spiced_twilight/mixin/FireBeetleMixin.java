@@ -20,10 +20,11 @@ public class FireBeetleMixin extends Monster {
 
     @Inject(method = "registerGoals", at = @At("TAIL"))
     protected void registerGoals(CallbackInfo ci) {
-        this.goalSelector.getAvailableGoals().stream().filter(goalSelector -> {
-            return goalSelector.getGoal() instanceof BreathAttackGoal;
-        }).forEach(this.goalSelector::removeGoal);
 
-        this.goalSelector.addGoal(2, new FireBeetleBreathGoal<>((FireBeetle) (Object) this, 5.0F, 30, 0.1F));
+        this.goalSelector.removeAllGoals(goal -> {
+            return goal instanceof BreathAttackGoal<?>;
+        });
+
+        this.goalSelector.addGoal(2, new FireBeetleBreathGoal<>((FireBeetle) (Object) this, 5.0F, 40, 0.1F));
     }
 }
