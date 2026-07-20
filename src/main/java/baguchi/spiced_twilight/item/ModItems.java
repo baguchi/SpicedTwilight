@@ -19,6 +19,6 @@ public class ModItems {
 
     public static final DeferredItem<Item> MAZE_SLIME_BEETLE_SPAWN_EGG = ITEMS.registerItem("maze_slime_beetle_spawn_egg", (properties) -> new DeferredSpawnEggItem(ModEntities.MAZE_SLIME_BEETLE, 10724259, 2767639, (properties)));
     public static final DeferredItem<Item> FIRE_BEETLE_POWDER = ITEMS.registerItem("fire_beetle_powder", (properties) -> new Item((properties.component(DataComponents.LORE, new ItemLore(List.of(Component.translatable("item.spiced_twilight.fire_beetle_powder.desc")))))));
-    public static final DeferredItem<Item> HYDRA_HIDE = ITEMS.registerItem("hydra_hide", (properties) -> new Item((properties.rarity(Rarity.UNCOMMON))));
-    public static final DeferredItem<Item> CINDER_POUCH = ITEMS.registerItem("cinder_pouch", (properties) -> new CinderPouchItem((properties.component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY).rarity(Rarity.UNCOMMON).component(DataComponents.LORE, new ItemLore(List.of(Component.translatable("item.spiced_twilight.cinder_pouch.desc")))))));
+    public static final DeferredItem<Item> HYDRA_HIDE = ITEMS.registerItem("hydra_hide", (properties) -> new Item((properties.fireResistant().rarity(Rarity.UNCOMMON))));
+    public static final DeferredItem<Item> CINDER_POUCH = ITEMS.registerItem("cinder_pouch", (properties) -> new CinderPouchItem((properties.fireResistant().stacksTo(1).component(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY).rarity(Rarity.UNCOMMON).component(DataComponents.LORE, new ItemLore(List.of(Component.translatable("item.spiced_twilight.cinder_pouch.desc")))))));
 }

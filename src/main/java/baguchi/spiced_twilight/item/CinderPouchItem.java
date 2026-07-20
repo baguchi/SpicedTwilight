@@ -108,10 +108,12 @@ public class CinderPouchItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
-        if (remainingUseDuration % 10 == 0) {
+        if (remainingUseDuration % 20 == 0) {
             BundleContents bundlecontents = stack.get(DataComponents.BUNDLE_CONTENTS);
             if (!bundlecontents.isEmpty()) {
-                removeOneItem(bundlecontents);
+                removeOneItem(stack, bundlecontents);
+            } else {
+                livingEntity.stopUsingItem();
             }
         }
 
@@ -148,12 +150,12 @@ public class CinderPouchItem extends Item {
 
     private @org.jetbrains.annotations.Nullable Entity getHeadLookTarget(LivingEntity living) {
         Entity pointedEntity = null;
-        double range = 60.0F;
-        double offset = 0.5F;
+        double range = 30.0F;
+        double offset = 0.0F;
         Vec3 srcVec = new Vec3(living.getX(), living.getY() + (double) living.getEyeHeight(), living.getZ());
         Vec3 lookVec = living.getViewVector(1.0F);
         Vec3 destVec = srcVec.add(lookVec.x() * range, lookVec.y() * range, lookVec.z() * range);
-        float var9 = 1.5F;
+        float var9 = 6.5F;
         List<Entity> possibleList = living.level().getEntities(living, living.getBoundingBox().move(lookVec.x() * offset, lookVec.y() * offset, lookVec.z() * offset).inflate(var9, var9, var9));
         double hitDist = 0.0F;
         if (living.isMultipartEntity()) {
@@ -183,18 +185,28 @@ public class CinderPouchItem extends Item {
         return pointedEntity;
     }
 
+    @Override
+    public boolean useOnRelease(ItemStack stack) {
+        return super.useOnRelease(stack);
+    }
 
     static Fraction getWeight(ItemStack stack) {
         return Fraction.getFraction(1, stack.getMaxStackSize());
     }
 
     @Nullable
-    public ItemStack removeOneItem(BundleContents bundleContents) {
+    public ItemStack removeOneItem(ItemStack stack, BundleContents bundleContents) {
         if (bundleContents.isEmpty()) {
             return null;
         } else {
             ItemStack copy = bundleContents.itemCopyStream().toList().get(0).copy();
-            bundleContents.getItemUnsafe(0).shrink(1);
+            if (bundleContents.getItemUnsafe(0).getCount() > 1) {
+                bundleContents.getItemUnsafe(0).shrink(1);
+            } else {
+                BundleContents.Mutable mutable = new BundleContents.Mutable(bundleContents);
+                mutable.removeOne();
+                stack.set(DataComponents.BUNDLE_CONTENTS, mutable.toImmutable());
+            }
 
             bundleContents.weight().subtract(getWeight(copy).multiplyBy(Fraction.getFraction(1, 1)));
             return copy;
