@@ -26,6 +26,8 @@ public class ModCreativeTabs {
             .displayItems((parameters, output) -> {
                 output.acceptAll(Stream.of(
                         ModItems.FIRE_BEETLE_POWDER,
+                        ModItems.HYDRA_HIDE,
+                        ModItems.CINDER_POUCH,
                         ModItems.MAZE_SLIME_BEETLE_SPAWN_EGG
                 ).map(sup -> {
                     return sup.get().getDefaultInstance();
